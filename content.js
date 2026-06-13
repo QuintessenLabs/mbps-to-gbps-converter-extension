@@ -2,35 +2,32 @@ let totalConversions = 0;
 let isEnabled = true;
 let observer = null;
 
-// Suffix conversion logic
+// Suffix conversion logic (Troll Mode)
 function convertTextNode(node) {
   const text = node.nodeValue;
-  // Match numbers like 500, 1,200, 10.5 followed by Mbps, mbps, Mb/s, mb/s
-  const regex = /(\d{1,3}(?:,\d{3})*(?:\.\d+)?)\s*(Mbps|mbps|Mb\/s|mb\/s)\b/g;
+  if (!text) return 0;
   
-  if (!text || !regex.test(text)) return 0;
-  
-  regex.lastIndex = 0;
   let matchCount = 0;
   
-  const newText = text.replace(regex, (match, numStr, suffix) => {
-    const cleanNum = parseFloat(numStr.replace(/,/g, ''));
-    if (isNaN(cleanNum)) return match;
-    
-    // Troll mode: Keep the original number exactly as-is to fake a 1000x speed increase!
-    const formatted = numStr;
-    
-    // Maintain capitalization style of prefix/suffix
-    let newSuffix = 'Gbps';
-    if (suffix.includes('/s')) {
-      newSuffix = suffix.startsWith('M') ? 'Gb/s' : 'gb/s';
-    } else {
-      newSuffix = suffix.startsWith('M') ? 'Gbps' : 'gbps';
+  const replacements = [
+    { regex: /\bMegabits\b/g, rep: 'Gigabits' },
+    { regex: /\bmegabits\b/g, rep: 'gigabits' },
+    { regex: /\bMegabit\b/g, rep: 'Gigabit' },
+    { regex: /\bmegabit\b/g, rep: 'gigabit' },
+    { regex: /\bMbps\b/g, rep: 'Gbps' },
+    { regex: /\bmbps\b/g, rep: 'gbps' },
+    { regex: /\bMb\/s\b/g, rep: 'Gb/s' },
+    { regex: /\bmb\/s\b/g, rep: 'gb/s' }
+  ];
+  
+  let newText = text;
+  for (const item of replacements) {
+    if (item.regex.test(newText)) {
+      item.regex.lastIndex = 0; // Reset regex index
+      newText = newText.replace(item.regex, item.rep);
+      matchCount++;
     }
-    
-    matchCount++;
-    return `${formatted} ${newSuffix}`;
-  });
+  }
   
   if (matchCount > 0) {
     node.nodeValue = newText;
