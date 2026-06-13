@@ -17,9 +17,8 @@ function convertTextNode(node) {
     const cleanNum = parseFloat(numStr.replace(/,/g, ''));
     if (isNaN(cleanNum)) return match;
     
-    const converted = cleanNum / 1000;
-    // Format to max 3 decimal places, strip trailing zeros
-    const formatted = Number(converted.toFixed(3));
+    // Troll mode: Keep the original number exactly as-is to fake a 1000x speed increase!
+    const formatted = numStr;
     
     // Maintain capitalization style of prefix/suffix
     let newSuffix = 'Gbps';
