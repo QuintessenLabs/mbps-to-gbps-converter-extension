@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mbps to Gbps Converter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="22" height="22" class="logo-icon">
+          <!-- Speedometer and letter G icon concept -->
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="none"/>
+          <path d="M12 3a9 9 0 0 0-9 9c0 2.24.82 4.29 2.17 5.88l1.43-1.43A6.93 6.93 0 0 1 5 12a7 7 0 0 1 12.24-4.76l1.43-1.43A8.93 8.93 0 0 0 12 3zm6.83 3.12l-1.43 1.43A6.95 6.95 0 0 1 19 12a7 7 0 0 1-7 7 6.95 6.95 0 0 1-4.76-1.76l-1.43 1.43A8.95 8.95 0 0 0 12 21a9 9 0 0 0 9-9c0-2.24-.82-4.29-2.17-5.88z" fill="currentColor"/>
+          <path d="M12 8v4l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Speed Volts</span>
+      </div>
+      <div class="version">v1.0</div>
+    </header>
+
+    <main>
+      <!-- Enable/Disable Switch Card -->
+      <div class="card toggle-card">
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Enable Conversion</span>
+            <span class="toggle-desc">Automatically convert Mbps to Gbps</span>
+          </div>
+          <label class="toggle-switch" for="enabled-toggle">
+            <input type="checkbox" id="enabled-toggle" checked>
+            <span class="toggle-thumb"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Stats Card -->
+      <div class="card stats-card">
+        <div class="stat-item">
+          <span class="stat-value" id="page-conversions">0</span>
+          <span class="stat-label">Speeds Converted on Page</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value highlight" id="global-conversions">0</span>
+          <span class="stat-label">Total Conversions (All-Time)</span>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span>Toggles automatically reload active tab to update text.</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
